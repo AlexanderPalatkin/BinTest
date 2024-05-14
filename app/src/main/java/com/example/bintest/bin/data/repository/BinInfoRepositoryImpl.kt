@@ -20,8 +20,8 @@ class BinInfoRepositoryImpl @Inject constructor(
         return binInfo
     }
 
-    override fun getAllBinInfo(): Flow<List<BinInfo>> {
-        return binsDao.getAllBinInfo().mapNotNull { binInfoEntityList ->
+    override fun getBinInfoList(): Flow<List<BinInfo>> {
+        return binsDao.getBinInfoList().mapNotNull { binInfoEntityList ->
             binInfoEntityList.map { binInfoEntity ->
                 binInfoEntity.toBinInfo()
             }

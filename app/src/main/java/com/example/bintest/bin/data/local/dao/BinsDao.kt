@@ -15,5 +15,5 @@ interface BinsDao {
     suspend fun addBinInfo(binInfoEntity: BinInfoEntity)
 
     @Query("SELECT * FROM $BIN_TABLE")
-    fun getAllBinInfo(): Flow<List<BinInfoEntity>>
+    fun getBinInfoList(): Flow<List<BinInfoEntity>>
 }

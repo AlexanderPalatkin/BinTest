@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface BinInfoRepository {
     suspend fun getBinInfo(id: Int): BinInfo
-    fun getAllBinInfo(): Flow<List<BinInfo>>
+    fun getBinInfoList(): Flow<List<BinInfo>>
 }

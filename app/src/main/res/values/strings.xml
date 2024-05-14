@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">BinTest</string>
+
+    // BinInfo card
+    <string name="bin_information">BIN %1$s Information:</string>
+    <string name="scheme">Scheme: %1$s</string>
+    <string name="type">Type: %1$s</string>
+    <string name="brand">Brand: %1$s</string>
+    <string name="prepaid">Prepaid: %1$s</string>
+    <string name="country_alpha">Country alpha: %1$s</string>
+    <string name="country_name">Country name: %1$s</string>
+    <string name="country_latitude">Country latitude: %1$s</string>
+    <string name="country_longitude">Country longitude: %1$s</string>
+    <string name="bank_name">Bank name: %1$s</string>
+    <string name="bank_phone">Bank phone: %1$s</string>
+    <string name="bank_url">Bank url: %1$s</string>
+    <string name="bank_city">Bank city: %1$s</string>
+    <string name="number_length">Number length: %1$s</string>
+    <string name="number_luhn">Number luhn: %1$s</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    // History screen
+    <string name="history_screen_title">History of cards:</string>
+    <string name="history_is_empty">History of cards is empty</string>
+
+    // Home screen
+    <string name="label_bin_number_field">Enter BIN number</string>
+    <string name="error_home_screen">Error: %1$s</string>
+    <string name="empty_home_screen">Enter a BIN number to get information.</string>
+    <string name="submit">Submit</string>
 </resources>
