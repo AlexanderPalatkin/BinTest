@@ -1,5 +1,6 @@
 package com.example.bintest.bin.presentation.history_screen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,12 +15,22 @@ import com.example.bintest.R
 import com.example.bintest.bin.domain.model.BinInfo
 
 @Composable
-fun BinInfoCard(binInfo: BinInfo) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .padding(4.dp)) {
+fun BinInfoCard(
+    binInfo: BinInfo,
+    onLatLonClick: (lat: Double, lon: Double) -> Unit,
+    onBankPhoneClick: (phone: String) -> Unit,
+    onBankUrlClick: (url: String) -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(4.dp)
+    ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(R.string.bin_information, binInfo.id), fontWeight = FontWeight.Bold)
+            Text(
+                text = stringResource(R.string.bin_information, binInfo.id),
+                fontWeight = FontWeight.Bold
+            )
             Text(
                 text = stringResource(
                     R.string.scheme,
@@ -39,11 +50,30 @@ fun BinInfoCard(binInfo: BinInfo) {
             )
             Text(text = stringResource(R.string.country_alpha, binInfo.countryAlpha))
             Text(text = stringResource(R.string.country_name, binInfo.countryName))
-            Text(text = stringResource(R.string.country_latitude, binInfo.countryLat))
-            Text(text = stringResource(R.string.country_longitude, binInfo.countryLon))
+            Text(
+                modifier = Modifier.clickable {
+                    onLatLonClick(binInfo.countryLat.toDouble(), binInfo.countryLon.toDouble())
+                },
+                text = stringResource(
+                    R.string.country_lat_lon,
+                    binInfo.countryLat,
+                    binInfo.countryLon
+                )
+            )
             Text(text = stringResource(R.string.bank_name, binInfo.bankName))
-            Text(text = stringResource(R.string.bank_phone, binInfo.bankPhone))
-            Text(text = stringResource(R.string.bank_url, binInfo.bankUrl))
+            Text(
+                modifier = Modifier.clickable {
+                    if (binInfo.bankPhone.isNotEmpty()) {
+                        onBankPhoneClick(binInfo.bankPhone)
+                    }
+                },
+                text = stringResource(R.string.bank_phone, binInfo.bankPhone)
+            )
+            Text(modifier = Modifier.clickable {
+                if (binInfo.bankUrl.isNotEmpty()) {
+                    onBankUrlClick(binInfo.bankUrl)
+                }
+            }, text = stringResource(R.string.bank_url, binInfo.bankUrl))
             Text(text = stringResource(R.string.bank_city, binInfo.bankCity))
             Text(text = stringResource(R.string.number_length, binInfo.numberLength))
             Text(

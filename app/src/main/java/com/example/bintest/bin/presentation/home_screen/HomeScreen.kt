@@ -30,7 +30,10 @@ import com.example.bintest.bin.presentation.home_screen.components.BinInfoHomeCa
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    onLatLonClick: (lat: Double, lon: Double) -> Unit,
+    onBankPhoneClick: (phone: String) -> Unit,
+    onBankUrlClick: (url: String) -> Unit
 ) {
     val state by homeViewModel.binInfoState.collectAsStateWithLifecycle()
 
@@ -67,7 +70,8 @@ fun HomeScreen(
         Button(
             onClick = {
                 keyboardController?.hide()
-                homeViewModel.getBinInfo(binNumber.value) },
+                homeViewModel.getBinInfo(binNumber.value)
+            },
             modifier = Modifier.fillMaxWidth(),
             enabled = binNumber.value.length == 8
         ) {
@@ -76,15 +80,28 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        when(state) {
-            is BinInfoViewState.Loading -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        when (state) {
+            is BinInfoViewState.Loading -> Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
                 CircularProgressIndicator()
             }
-            is BinInfoViewState.Success -> BinInfoHomeCard(binInfo = (state as BinInfoViewState.Success).binInfo)
-            is BinInfoViewState.Error -> Text(text = stringResource(
-                R.string.error_home_screen,
-                (state as BinInfoViewState.Error).message
-            ))
+
+            is BinInfoViewState.Success -> BinInfoHomeCard(
+                binInfo = (state as BinInfoViewState.Success).binInfo,
+                onLatLonClick,
+                onBankPhoneClick,
+                onBankUrlClick
+            )
+
+            is BinInfoViewState.Error -> Text(
+                text = stringResource(
+                    R.string.error_home_screen,
+                    (state as BinInfoViewState.Error).message
+                )
+            )
+
             is BinInfoViewState.Empty -> Text(text = stringResource(R.string.empty_home_screen))
         }
     }

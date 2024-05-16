@@ -16,7 +16,9 @@ class BinInfoRepositoryImpl @Inject constructor(
 ) : BinInfoRepository {
     override suspend fun getBinInfo(id: Int): BinInfo {
         val binInfo = binsApi.getBinInfo(id.toString()).toBinInfo(id)
-        binsDao.addBinInfo(binInfo.toBinInfoEntity())
+        if (binInfo.bankName.isNotEmpty()) {
+            binsDao.addBinInfo(binInfo.toBinInfoEntity())
+        }
         return binInfo
     }
 

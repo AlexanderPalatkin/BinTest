@@ -9,14 +9,25 @@ import com.example.bintest.bin.presentation.home_screen.HomeScreen
 
 @Composable
 fun BottomNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    onLatLonClick: (lat: Double, lon: Double) -> Unit,
+    onBankPhoneClick: (phone: String) -> Unit,
+    onBankUrlClick: (url: String) -> Unit
 ) {
     NavHost(navController = navController, startDestination = BottomBarScreen.Home.route) {
         composable(route = BottomBarScreen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                onLatLonClick = onLatLonClick,
+                onBankPhoneClick = onBankPhoneClick,
+                onBankUrlClick = onBankUrlClick
+            )
         }
         composable(route = BottomBarScreen.History.route) {
-            HistoryScreen()
+            HistoryScreen(
+                onLatLonClick = onLatLonClick,
+                onBankPhoneClick = onBankPhoneClick,
+                onBankUrlClick = onBankUrlClick
+            )
         }
     }
 }

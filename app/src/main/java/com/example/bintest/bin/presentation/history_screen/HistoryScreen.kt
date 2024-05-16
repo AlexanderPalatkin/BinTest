@@ -20,7 +20,10 @@ import com.example.bintest.bin.presentation.history_screen.components.HistoryCon
 
 @Composable
 fun HistoryScreen(
-    historyViewModel: HistoryViewModel = hiltViewModel()
+    historyViewModel: HistoryViewModel = hiltViewModel(),
+    onLatLonClick: (lat: Double, lon: Double) -> Unit,
+    onBankPhoneClick: (phone: String) -> Unit,
+    onBankUrlClick: (url: String) -> Unit
 ) {
     val state by historyViewModel.state.collectAsStateWithLifecycle()
 
@@ -31,12 +34,22 @@ fun HistoryScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        when(state) {
+        when (state) {
             is HistoryViewState.Empty -> Text(text = stringResource(R.string.history_is_empty))
-            is HistoryViewState.Loading -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            is HistoryViewState.Loading -> Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
                 CircularProgressIndicator()
             }
-            is HistoryViewState.Success -> HistoryContent(binInfoList = (state as HistoryViewState.Success).binInfoList)
+
+            is HistoryViewState.Success -> HistoryContent(
+                binInfoList = (state as HistoryViewState.Success).binInfoList,
+                onLatLonClick,
+                onBankPhoneClick,
+                onBankUrlClick
+            )
+
             is HistoryViewState.Error -> Text(text = (state as HistoryViewState.Error).message)
         }
     }

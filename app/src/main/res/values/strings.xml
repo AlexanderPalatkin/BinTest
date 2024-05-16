@@ -9,8 +9,7 @@
     <string name="prepaid">Prepaid: %1$s</string>
     <string name="country_alpha">Country alpha: %1$s</string>
     <string name="country_name">Country name: %1$s</string>
-    <string name="country_latitude">Country latitude: %1$s</string>
-    <string name="country_longitude">Country longitude: %1$s</string>
+    <string name="country_lat_lon">Country lat: %1$s lon: %2$s</string>
     <string name="bank_name">Bank name: %1$s</string>
     <string name="bank_phone">Bank phone: %1$s</string>
     <string name="bank_url">Bank url: %1$s</string>

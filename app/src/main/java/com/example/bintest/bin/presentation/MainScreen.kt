@@ -13,7 +13,11 @@ import com.example.bintest.bin.presentation.bottomnav.BottomBar
 import com.example.bintest.bin.presentation.bottomnav.BottomNavGraph
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onLatLonClick: (lat: Double, lon: Double) -> Unit,
+    onBankPhoneClick: (phone: String) -> Unit,
+    onBankUrlClick: (url: String) -> Unit
+) {
     val navController = rememberNavController()
 
     Surface(
@@ -26,7 +30,12 @@ fun MainScreen() {
             }
         ) {
             Box(modifier = Modifier.padding(it)) {
-                BottomNavGraph(navController = navController)
+                BottomNavGraph(
+                    navController = navController,
+                    onLatLonClick,
+                    onBankPhoneClick,
+                    onBankUrlClick
+                )
             }
         }
     }
